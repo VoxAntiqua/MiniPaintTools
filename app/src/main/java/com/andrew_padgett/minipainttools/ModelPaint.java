@@ -3,8 +3,9 @@ package com.andrew_padgett.minipainttools;
 import android.graphics.Color;
 
 /**
- * The ModelPaint class describes a paint used for miniature hobby painting, and includes tools for
- * comparing with other colors and building color schemes using the android.graphics.Color library.
+ * The ModelPaint class describes a paint used for miniature hobby painting, and is designed to
+ * interface with tools for comparing colors and building color schemes using the
+ * android.graphics.Color library.
  *
  * @author Andrew Padgett
  * @version 1.0
@@ -12,7 +13,7 @@ import android.graphics.Color;
 public final class ModelPaint {
     private String mName;
     private String mManufacturer;
-    private Color mPaintColor;
+    private int mPaintColor;
     private Boolean mInCollection;
     private Boolean mInWishlist;
 
@@ -20,9 +21,9 @@ public final class ModelPaint {
      *
      * @param name (required) name of the paint - e.g. "German Tank Brown"
      * @param manufacturer (required) name of manufacturer - e.g. "Vallejo Model Air"
-     * @param paintColor (required) Java Color object associated with the paint
+     * @param paintColor (required) Color associated with the paint in ARGB integer format
      * */
-    public ModelPaint(String name, String manufacturer, Color paintColor) {
+    public ModelPaint(String name, String manufacturer, int paintColor) {
         this(name, manufacturer, paintColor, false, false);
     }
 
@@ -30,11 +31,11 @@ public final class ModelPaint {
      *
      * @param name (required) name of the paint - e.g. "German Tank Brown"
      * @param manufacturer (required) name of manufacturer - e.g. "Vallejo Model Air"
-     * @param paintColor (required) Java Color object associated with the paint
+     * @param paintColor (required) Color associated with the paint in ARGB integer format
      * @param inCollection (optional) whether the paint is in the user's collection
      * @param inWishlist (optional) whether the paint is in the user's wishlist
      */
-    public ModelPaint(String name, String manufacturer, Color paintColor, Boolean inCollection,
+    public ModelPaint(String name, String manufacturer, int paintColor, Boolean inCollection,
                       Boolean inWishlist) {
         mName = name;
         mManufacturer = manufacturer;
@@ -52,7 +53,7 @@ public final class ModelPaint {
         return mManufacturer;
     }
 
-    public Color getPaintColor() {
+    public int getPaintColor() {
         return mPaintColor;
     }
 
@@ -73,7 +74,7 @@ public final class ModelPaint {
         mManufacturer = manufacturer;
     }
 
-    public void setPaintColor(Color paintColor) {
+    public void setPaintColor(int paintColor) {
         mPaintColor = paintColor;
     }
 
