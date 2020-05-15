@@ -16,7 +16,6 @@ public class PaintAdapter extends RecyclerView.Adapter<PaintAdapter.PaintViewHol
 
     private ModelPaint[] mData;
     private LayoutInflater mInflater;
-    private AdapterView.OnItemClickListener mClickListener;
 
     // Pass data into the constructor
     PaintAdapter(Context context, ModelPaint[] data) {
@@ -55,7 +54,7 @@ public class PaintAdapter extends RecyclerView.Adapter<PaintAdapter.PaintViewHol
 
 
     // Store and recycle views as they scroll off screen
-    public class PaintViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class PaintViewHolder extends RecyclerView.ViewHolder {
         public TextView paintNameTextView;
         public TextView manufacturerTextView;
         public TextView hexCodeTextView;
@@ -67,23 +66,8 @@ public class PaintAdapter extends RecyclerView.Adapter<PaintAdapter.PaintViewHol
             manufacturerTextView = itemView.findViewById(R.id.tv_manufacturer);
             hexCodeTextView = itemView.findViewById(R.id.tv_hex_code);
             colorView = itemView.findViewById(R.id.color_view);
-            itemView.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View view) {
-            onItemClick(view, getAdapterPosition());
-        }
     }
-
-    // Convenience method for getting data at click position
-    public String getItem(int id) {
-        return mData[id].getName();
-    }
-
-    // Method that executes following code for action received
-    public void onItemClick(View view, int position) {
-        Log.i("TAG", "You clicked paint name " + getItem(position).toString() + ", which is at position " + position);
-        }
 
 }
