@@ -30,7 +30,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="Sotek Green"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/color_view" />
 
@@ -42,6 +42,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
             android:text="Citadel"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_paint_name" />
 
@@ -54,6 +55,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="8dp"
             android:text="#LOLOLO"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_manufacturer" />

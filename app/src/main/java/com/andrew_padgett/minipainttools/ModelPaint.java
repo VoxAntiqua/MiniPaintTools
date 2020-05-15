@@ -2,6 +2,8 @@ package com.andrew_padgett.minipainttools;
 
 import android.graphics.Color;
 
+import androidx.annotation.ColorInt;
+
 /**
  * The ModelPaint class describes a paint used for miniature hobby painting, and is designed to
  * interface with tools for comparing colors and building color schemes using the
@@ -13,7 +15,7 @@ import android.graphics.Color;
 public final class ModelPaint {
     private String mName;
     private String mManufacturer;
-    private int mPaintColor;
+    @ColorInt private int mPaintColor;
     private Boolean mInCollection;
     private Boolean mInWishlist;
 
@@ -23,7 +25,7 @@ public final class ModelPaint {
      * @param manufacturer (required) name of manufacturer - e.g. "Vallejo Model Air"
      * @param paintColor (required) Color associated with the paint in ARGB integer format
      * */
-    public ModelPaint(String name, String manufacturer, int paintColor) {
+    public ModelPaint(String name, String manufacturer, @ColorInt int paintColor) {
         this(name, manufacturer, paintColor, false, false);
     }
 
@@ -35,7 +37,7 @@ public final class ModelPaint {
      * @param inCollection (optional) whether the paint is in the user's collection
      * @param inWishlist (optional) whether the paint is in the user's wishlist
      */
-    public ModelPaint(String name, String manufacturer, int paintColor, Boolean inCollection,
+    public ModelPaint(String name, String manufacturer, @ColorInt int paintColor, Boolean inCollection,
                       Boolean inWishlist) {
         mName = name;
         mManufacturer = manufacturer;
@@ -53,7 +55,7 @@ public final class ModelPaint {
         return mManufacturer;
     }
 
-    public int getPaintColor() {
+    public @ColorInt int getPaintColor() {
         return mPaintColor;
     }
 
@@ -74,7 +76,7 @@ public final class ModelPaint {
         mManufacturer = manufacturer;
     }
 
-    public void setPaintColor(int paintColor) {
+    public void setPaintColor(@ ColorInt int paintColor) {
         mPaintColor = paintColor;
     }
 
