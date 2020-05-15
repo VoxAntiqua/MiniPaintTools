@@ -1,11 +1,13 @@
 package com.andrew_padgett.minipainttools;
 
 import android.content.Context;
+import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -39,11 +41,13 @@ public class PaintAdapter extends RecyclerView.Adapter<PaintAdapter.PaintViewHol
         String manufacturer = modelPaint.getManufacturer();
         @ColorInt int paintColor = modelPaint.getPaintColor();
         String hexCode = String.format("#%06X", (0xFFFFFF & paintColor));
+        boolean inCollection = modelPaint.getInCollection();
 
         holder.paintNameTextView.setText(paintName);
         holder.manufacturerTextView.setText(manufacturer);
         holder.hexCodeTextView.setText(hexCode);
         holder.colorView.setBackgroundColor(paintColor);
+        if (!inCollection) holder.inCollectionIcon.setVisibility(View.INVISIBLE);
     }
 
     // Total number of card views
@@ -59,6 +63,7 @@ public class PaintAdapter extends RecyclerView.Adapter<PaintAdapter.PaintViewHol
         public TextView manufacturerTextView;
         public TextView hexCodeTextView;
         public View colorView;
+        public ImageView inCollectionIcon;
 
         public PaintViewHolder(View itemView) {
             super(itemView);
@@ -66,6 +71,7 @@ public class PaintAdapter extends RecyclerView.Adapter<PaintAdapter.PaintViewHol
             manufacturerTextView = itemView.findViewById(R.id.tv_manufacturer);
             hexCodeTextView = itemView.findViewById(R.id.tv_hex_code);
             colorView = itemView.findViewById(R.id.color_view);
+            inCollectionIcon = itemView.findViewById(R.id.in_collection_check);
         }
 
     }
