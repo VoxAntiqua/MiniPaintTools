@@ -6,11 +6,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Display;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements PaintAdapter.OnPaintClickListener {
 
     PaintAdapter adapter;
+    ArrayList<ModelPaint> data = new ArrayList<ModelPaint>();
+    Toast toast = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,26 +43,26 @@ public class MainActivity extends AppCompatActivity implements PaintAdapter.OnPa
         ModelPaint modelPaintPlaceHolder18 = new ModelPaint("Baharroth Blue", "Citadel", Color.parseColor("#58C1CD"));
         ModelPaint modelPaintPlaceHolder19 = new ModelPaint("Blue Horror", "Citadel", Color.parseColor("#A2BAD2"));
         ModelPaint modelPaintPlaceHolder20 = new ModelPaint("Dechala Lilac", "Citadel", Color.parseColor("#B69FCC"));
-        ModelPaint[] data = {modelPaintPlaceHolder01,
-                modelPaintPlaceHolder02,
-                modelPaintPlaceHolder03,
-                modelPaintPlaceHolder04,
-                modelPaintPlaceHolder05,
-                modelPaintPlaceHolder06,
-                modelPaintPlaceHolder07,
-                modelPaintPlaceHolder08,
-                modelPaintPlaceHolder09,
-                modelPaintPlaceHolder10,
-                modelPaintPlaceHolder11,
-                modelPaintPlaceHolder12,
-                modelPaintPlaceHolder13,
-                modelPaintPlaceHolder14,
-                modelPaintPlaceHolder15,
-                modelPaintPlaceHolder16,
-                modelPaintPlaceHolder17,
-                modelPaintPlaceHolder18,
-                modelPaintPlaceHolder19,
-                modelPaintPlaceHolder20};
+        data.add(modelPaintPlaceHolder01);
+        data.add(modelPaintPlaceHolder02);
+        data.add(modelPaintPlaceHolder03);
+        data.add(modelPaintPlaceHolder04);
+        data.add(modelPaintPlaceHolder05);
+        data.add(modelPaintPlaceHolder06);
+        data.add(modelPaintPlaceHolder07);
+        data.add(modelPaintPlaceHolder08);
+        data.add(modelPaintPlaceHolder09);
+        data.add(modelPaintPlaceHolder10);
+        data.add(modelPaintPlaceHolder11);
+        data.add(modelPaintPlaceHolder12);
+        data.add(modelPaintPlaceHolder13);
+        data.add(modelPaintPlaceHolder14);
+        data.add(modelPaintPlaceHolder15);
+        data.add(modelPaintPlaceHolder16);
+        data.add(modelPaintPlaceHolder17);
+        data.add(modelPaintPlaceHolder18);
+        data.add(modelPaintPlaceHolder19);
+        data.add(modelPaintPlaceHolder20);
 
         // Set up RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rv_paint_grid);
@@ -68,9 +73,20 @@ public class MainActivity extends AppCompatActivity implements PaintAdapter.OnPa
 
     }
 
+    // Define on click behavior for each card
     @Override
     public void onPaintClick(int position) {
-        Toast toast = Toast.makeText(this, position + " clicked!", Toast.LENGTH_LONG);
+        if (toast != null) toast.cancel();
+        // Toggle whether paint is in collection and update
+        if (data.get(position).getInCollection()) {
+            data.get(position).setInCollection(Boolean.FALSE);
+            toast = Toast.makeText(this, data.get(position).getName() + " removed from collection.", Toast.LENGTH_LONG);
+        } else {
+            data.get(position).setInCollection(Boolean.TRUE);
+            toast = Toast.makeText(this, data.get(position).getName() + " added to collection.", Toast.LENGTH_LONG);
+        }
         toast.show();
+        adapter.notifyItemChanged(position);
+
     }
 }

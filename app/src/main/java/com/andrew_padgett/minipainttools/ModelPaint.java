@@ -76,7 +76,7 @@ public final class ModelPaint {
         mManufacturer = manufacturer;
     }
 
-    public void setPaintColor(@ ColorInt int paintColor) {
+    public void setPaintColor(@ColorInt int paintColor) {
         mPaintColor = paintColor;
     }
 

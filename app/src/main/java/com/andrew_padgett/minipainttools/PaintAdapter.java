@@ -14,14 +14,16 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class PaintAdapter extends RecyclerView.Adapter<PaintAdapter.PaintViewHolder> {
 
-    private ModelPaint[] mData;
+    private ArrayList<ModelPaint> mData;
     private LayoutInflater mInflater;
     private OnPaintClickListener mOnPaintClickListener;
 
     // Pass data into the constructor
-    PaintAdapter(Context context, ModelPaint[] data, OnPaintClickListener onPaintClickListener) {
+    PaintAdapter(Context context, ArrayList<ModelPaint> data, OnPaintClickListener onPaintClickListener) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
         this.mOnPaintClickListener = onPaintClickListener;
@@ -38,7 +40,7 @@ public class PaintAdapter extends RecyclerView.Adapter<PaintAdapter.PaintViewHol
     // Bind data to each View in card layout
     @Override
     public void onBindViewHolder(@NonNull PaintViewHolder holder, int position) {
-        ModelPaint modelPaint = mData[position];
+        ModelPaint modelPaint = mData.get(position);
         String paintName = modelPaint.getName();
         String manufacturer = modelPaint.getManufacturer();
         @ColorInt int paintColor = modelPaint.getPaintColor();
@@ -49,13 +51,17 @@ public class PaintAdapter extends RecyclerView.Adapter<PaintAdapter.PaintViewHol
         holder.manufacturerTextView.setText(manufacturer);
         holder.hexCodeTextView.setText(hexCode);
         holder.colorView.setBackgroundColor(paintColor);
-        if (!inCollection) holder.inCollectionIcon.setVisibility(View.INVISIBLE);
+        if (!inCollection) {
+            holder.inCollectionIcon.setVisibility(View.INVISIBLE);
+        } else {
+            holder.inCollectionIcon.setVisibility(View.VISIBLE);
+        };
     }
 
     // Total number of card views
     @Override
     public int getItemCount() {
-        return mData.length;
+        return mData.size();
     }
 
 
