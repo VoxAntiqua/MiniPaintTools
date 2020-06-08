@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PaintAdapter.OnPaintClickListener {
 
     PaintAdapter adapter;
 
@@ -62,8 +63,14 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.rv_paint_grid);
         int numberOfColumns = 2;
         recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
-        adapter = new PaintAdapter(this, data);
+        adapter = new PaintAdapter(this, data, this);
         recyclerView.setAdapter(adapter);
 
+    }
+
+    @Override
+    public void onPaintClick(int position) {
+        Toast toast = Toast.makeText(this, position + " clicked!", Toast.LENGTH_LONG);
+        toast.show();
     }
 }

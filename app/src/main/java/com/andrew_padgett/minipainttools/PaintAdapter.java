@@ -18,11 +18,13 @@ public class PaintAdapter extends RecyclerView.Adapter<PaintAdapter.PaintViewHol
 
     private ModelPaint[] mData;
     private LayoutInflater mInflater;
+    private OnPaintClickListener mOnPaintClickListener;
 
     // Pass data into the constructor
-    PaintAdapter(Context context, ModelPaint[] data) {
+    PaintAdapter(Context context, ModelPaint[] data, OnPaintClickListener onPaintClickListener) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
+        this.mOnPaintClickListener = onPaintClickListener;
     }
 
     // Inflate card layout from xml when needed
@@ -30,7 +32,7 @@ public class PaintAdapter extends RecyclerView.Adapter<PaintAdapter.PaintViewHol
     @Override
     public PaintViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.paint_color_item_alt, parent, false);
-        return new PaintViewHolder(view);
+        return new PaintViewHolder(view, mOnPaintClickListener);
     }
 
     // Bind data to each View in card layout
@@ -58,22 +60,34 @@ public class PaintAdapter extends RecyclerView.Adapter<PaintAdapter.PaintViewHol
 
 
     // Store and recycle views as they scroll off screen
-    public class PaintViewHolder extends RecyclerView.ViewHolder {
+    public class PaintViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView paintNameTextView;
         public TextView manufacturerTextView;
         public TextView hexCodeTextView;
         public View colorView;
         public ImageView inCollectionIcon;
+        OnPaintClickListener onPaintClickListener;
 
-        public PaintViewHolder(View itemView) {
+        public PaintViewHolder(View itemView, OnPaintClickListener onPaintClickListener) {
             super(itemView);
             paintNameTextView = itemView.findViewById(R.id.tv_paint_name);
             manufacturerTextView = itemView.findViewById(R.id.tv_manufacturer);
             hexCodeTextView = itemView.findViewById(R.id.tv_hex_code);
             colorView = itemView.findViewById(R.id.color_view);
             inCollectionIcon = itemView.findViewById(R.id.in_collection_check);
+            this.onPaintClickListener = onPaintClickListener;
+
+            itemView.setOnClickListener(this);
         }
 
+        @Override
+        public void onClick(View v) {
+            onPaintClickListener.onPaintClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnPaintClickListener{
+        void onPaintClick(int position);
     }
 
 }
