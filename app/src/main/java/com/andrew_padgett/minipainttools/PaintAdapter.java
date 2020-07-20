@@ -12,20 +12,25 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.andrew_padgett.minipainttools.data.ModelPaintEntity;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class PaintAdapter extends RecyclerView.Adapter<PaintAdapter.PaintViewHolder> {
 
-    private ArrayList<ModelPaint> mData;
+//    private ArrayList<ModelPaint> mData;
     private LayoutInflater mInflater;
     private OnPaintClickListener mOnPaintClickListener;
 
+    private List<ModelPaintEntity> mData; // Cached copy of model paints
+
     // Pass data into the constructor
-    PaintAdapter(Context context, ArrayList<ModelPaint> data, OnPaintClickListener onPaintClickListener) {
+    PaintAdapter(Context context, OnPaintClickListener onPaintClickListener) {
         this.mInflater = LayoutInflater.from(context);
-        this.mData = data;
         this.mOnPaintClickListener = onPaintClickListener;
     }
 
@@ -40,28 +45,47 @@ public class PaintAdapter extends RecyclerView.Adapter<PaintAdapter.PaintViewHol
     // Bind data to each View in card layout
     @Override
     public void onBindViewHolder(@NonNull PaintViewHolder holder, int position) {
-        ModelPaint modelPaint = mData.get(position);
-        String paintName = modelPaint.getName();
-        String manufacturer = modelPaint.getManufacturer();
-        @ColorInt int paintColor = modelPaint.getPaintColor();
-        String hexCode = String.format("#%06X", (0xFFFFFF & paintColor));
-        boolean inCollection = modelPaint.getInCollection();
+//        ModelPaint modelPaint = mData.get(position);
+//        String paintName = modelPaint.getName();
+//        String manufacturer = modelPaint.getManufacturer();
+//        @ColorInt int paintColor = modelPaint.getPaintColor();
+//        String hexCode = String.format("#%06X", (0xFFFFFF & paintColor));
+//        boolean inCollection = modelPaint.getInCollection();
+//
+//        holder.paintNameTextView.setText(paintName);
+//        holder.manufacturerTextView.setText(manufacturer);
+//        holder.hexCodeTextView.setText(hexCode);
+//        holder.colorView.setBackgroundColor(paintColor);
+//        if (!inCollection) {
+//            holder.inCollectionIcon.setVisibility(View.INVISIBLE);
+//        } else {
+//            holder.inCollectionIcon.setVisibility(View.VISIBLE);
+//        };
 
-        holder.paintNameTextView.setText(paintName);
-        holder.manufacturerTextView.setText(manufacturer);
-        holder.hexCodeTextView.setText(hexCode);
-        holder.colorView.setBackgroundColor(paintColor);
-        if (!inCollection) {
-            holder.inCollectionIcon.setVisibility(View.INVISIBLE);
+        if (mData != null) {
+            ModelPaintEntity current = mData.get(position);
+            holder.paintNameTextView.setText(current.getName());
+            holder.manufacturerTextView.setText(current.getManufacturer());
+            @ColorInt int paintColor = current.getColor();
+            String hexCode = String.format("#%06X", (0xFFFFFF & paintColor));
+            holder.hexCodeTextView.setText(hexCode);
+            holder.colorView.setBackgroundColor(paintColor);
+            if (current.getInCollection() == 0) {
+                holder.inCollectionIcon.setVisibility(View.INVISIBLE);
+            } else {
+                holder.inCollectionIcon.setVisibility(View.VISIBLE);
+            }
         } else {
-            holder.inCollectionIcon.setVisibility(View.VISIBLE);
-        };
+            holder.paintNameTextView.setText("No paints added");
+        }
     }
 
     // Total number of card views
     @Override
     public int getItemCount() {
-        return mData.size();
+        if (mData != null) {
+            return mData.size();
+        } else return 0;
     }
 
 

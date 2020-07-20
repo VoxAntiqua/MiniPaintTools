@@ -4,6 +4,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 /**
@@ -19,7 +20,7 @@ import androidx.room.PrimaryKey;
 public class ModelPaintEntity {
 
     @PrimaryKey(autoGenerate = true)
-    private int mId;
+    private int id=0;
 
     @NonNull
     @ColumnInfo(name="name")
@@ -34,11 +35,11 @@ public class ModelPaintEntity {
     @ColorInt private int mColor;
 
     @NonNull
-    @ColumnInfo(name="in_collection")
+    @ColumnInfo(name="in_collection", defaultValue = "0")
     private int mInCollection;
 
     @NonNull
-    @ColumnInfo(name="in_wishlist")
+    @ColumnInfo(name="in_wishlist", defaultValue = "0")
     private int mInWishlist;
 
     public ModelPaintEntity(int id,
@@ -47,7 +48,7 @@ public class ModelPaintEntity {
                             @ColorInt int color,
                             int inCollection,
                             int inWishlist) {
-        this.mId = id;
+        this.id = id;
         this.mName = name;
         this.mManufacturer = manufacturer;
         this.mColor = color;
@@ -55,11 +56,24 @@ public class ModelPaintEntity {
         this.mInWishlist = inWishlist;
     }
 
-    public String getName(){return this.mName;}
+    @Ignore
+    public ModelPaintEntity(String name,
+                            String manufacturer,
+                            @ColorInt int color,
+                            int inCollection,
+                            int inWishlist) {
+        this.mName = name;
+        this.mManufacturer = manufacturer;
+        this.mColor = color;
+        this.mInCollection = inCollection;
+        this.mInWishlist = inWishlist;
+    }
+
+    public String getName() { return this.mName; }
     public String getManufacturer(){return this.mManufacturer;}
     public @ColorInt int getColor(){return this.mColor;}
     public int getInCollection(){return this.mInCollection;}
     public int getInWishlist(){return this.mInWishlist;}
-    public int getId(){return this.mId;}
+    public int getId(){return id;}
 
 }
