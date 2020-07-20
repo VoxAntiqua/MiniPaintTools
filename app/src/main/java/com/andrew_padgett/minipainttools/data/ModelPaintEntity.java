@@ -76,4 +76,7 @@ public class ModelPaintEntity {
     public int getInWishlist(){return this.mInWishlist;}
     public int getId(){return id;}
 
+    public void setInCollection(int inCollection){mInCollection = inCollection;}
+    public void setInWishlist(int inWishlist){mInWishlist = inWishlist;}
+
 }

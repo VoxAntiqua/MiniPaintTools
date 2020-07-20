@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -23,4 +24,7 @@ public interface ModelPaintDao {
 
     @Query("SELECT * FROM paint_table ORDER BY name ASC")
     LiveData<List<ModelPaintEntity>> getPaintsByName();
+
+    @Update()
+    void updateModelPaint(ModelPaintEntity modelPaintEntity);
 }

@@ -1,6 +1,8 @@
 package com.andrew_padgett.minipainttools;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,13 +11,19 @@ import android.os.Bundle;
 import android.view.Display;
 import android.widget.Toast;
 
+import com.andrew_padgett.minipainttools.data.ModelPaintEntity;
+import com.andrew_padgett.minipainttools.data.ModelPaintViewModel;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements PaintAdapter.OnPaintClickListener {
 
     PaintAdapter adapter;
     ArrayList<ModelPaint> data = new ArrayList<ModelPaint>();
     Toast toast = null;
+
+    private ModelPaintViewModel mModelPaintViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +36,15 @@ public class MainActivity extends AppCompatActivity implements PaintAdapter.OnPa
         recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
         final PaintAdapter adapter = new PaintAdapter(this, this);
         recyclerView.setAdapter(adapter);
+
+        mModelPaintViewModel = new ViewModelProvider(this).get(ModelPaintViewModel.class);
+
+        mModelPaintViewModel.getAllModelPaintsByColor().observe(this, new Observer<List<ModelPaintEntity>>() {
+            @Override
+            public void onChanged(List<ModelPaintEntity> modelPaintEntities) {
+                adapter.setPaints(modelPaintEntities);
+            }
+        });
 
     }
 

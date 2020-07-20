@@ -22,7 +22,6 @@ import java.util.List;
 
 public class PaintAdapter extends RecyclerView.Adapter<PaintAdapter.PaintViewHolder> {
 
-//    private ArrayList<ModelPaint> mData;
     private LayoutInflater mInflater;
     private OnPaintClickListener mOnPaintClickListener;
 
@@ -45,22 +44,6 @@ public class PaintAdapter extends RecyclerView.Adapter<PaintAdapter.PaintViewHol
     // Bind data to each View in card layout
     @Override
     public void onBindViewHolder(@NonNull PaintViewHolder holder, int position) {
-//        ModelPaint modelPaint = mData.get(position);
-//        String paintName = modelPaint.getName();
-//        String manufacturer = modelPaint.getManufacturer();
-//        @ColorInt int paintColor = modelPaint.getPaintColor();
-//        String hexCode = String.format("#%06X", (0xFFFFFF & paintColor));
-//        boolean inCollection = modelPaint.getInCollection();
-//
-//        holder.paintNameTextView.setText(paintName);
-//        holder.manufacturerTextView.setText(manufacturer);
-//        holder.hexCodeTextView.setText(hexCode);
-//        holder.colorView.setBackgroundColor(paintColor);
-//        if (!inCollection) {
-//            holder.inCollectionIcon.setVisibility(View.INVISIBLE);
-//        } else {
-//            holder.inCollectionIcon.setVisibility(View.VISIBLE);
-//        };
 
         if (mData != null) {
             ModelPaintEntity current = mData.get(position);
@@ -118,6 +101,11 @@ public class PaintAdapter extends RecyclerView.Adapter<PaintAdapter.PaintViewHol
 
     public interface OnPaintClickListener{
         void onPaintClick(int position);
+    }
+
+    void setPaints(List<ModelPaintEntity> paints) {
+        mData = paints;
+        notifyDataSetChanged();
     }
 
 }
