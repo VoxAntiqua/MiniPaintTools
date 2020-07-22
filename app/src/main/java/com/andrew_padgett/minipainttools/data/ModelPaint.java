@@ -8,16 +8,16 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 /**
- * The ModelPaintEntity class describes a paint used for miniature hobby painting, and is designed
+ * The ModelPaint class describes a paint used for miniature hobby painting, and is designed
  * to interface with tools for comparing colors and building color schemes using the
- * android.graphics.Color library. Eventually this should be merged into the ModelPaint class.
+ * android.graphics.Color library.
  *
  * @author Andrew Padgett
  * @version 1.0
  */
 
 @Entity(tableName = "paint_table")
-public class ModelPaintEntity {
+public class ModelPaint {
 
     @PrimaryKey(autoGenerate = true)
     private int id=0;
@@ -42,12 +42,12 @@ public class ModelPaintEntity {
     @ColumnInfo(name="in_wishlist", defaultValue = "0")
     private int mInWishlist;
 
-    public ModelPaintEntity(int id,
-                            String name,
-                            String manufacturer,
-                            @ColorInt int color,
-                            int inCollection,
-                            int inWishlist) {
+    public ModelPaint(int id,
+                      String name,
+                      String manufacturer,
+                      @ColorInt int color,
+                      int inCollection,
+                      int inWishlist) {
         this.id = id;
         this.mName = name;
         this.mManufacturer = manufacturer;
@@ -57,11 +57,11 @@ public class ModelPaintEntity {
     }
 
     @Ignore
-    public ModelPaintEntity(String name,
-                            String manufacturer,
-                            @ColorInt int color,
-                            int inCollection,
-                            int inWishlist) {
+    public ModelPaint(String name,
+                      String manufacturer,
+                      @ColorInt int color,
+                      int inCollection,
+                      int inWishlist) {
         this.mName = name;
         this.mManufacturer = manufacturer;
         this.mColor = color;

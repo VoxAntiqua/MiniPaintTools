@@ -11,8 +11,8 @@ public class ModelPaintViewModel extends AndroidViewModel {
 
     private ModelPaintRepository mRepository;
 
-    private LiveData<List<ModelPaintEntity>> mAllPaintsByColor;
-    private LiveData<List<ModelPaintEntity>> mAllPaintsByName;
+    private LiveData<List<ModelPaint>> mAllPaintsByColor;
+    private LiveData<List<ModelPaint>> mAllPaintsByName;
 
     public ModelPaintViewModel (Application application) {
         super(application);
@@ -21,9 +21,9 @@ public class ModelPaintViewModel extends AndroidViewModel {
         mAllPaintsByName = mRepository.getAllModelPaintsByName();
     }
 
-    public LiveData<List<ModelPaintEntity>> getAllModelPaintsByColor() {return mAllPaintsByColor;}
-    public LiveData<List<ModelPaintEntity>> getAllModelPaintsByName() {return mAllPaintsByName;}
+    public LiveData<List<ModelPaint>> getAllModelPaintsByColor() {return mAllPaintsByColor;}
+    public LiveData<List<ModelPaint>> getAllModelPaintsByName() {return mAllPaintsByName;}
 
-    public void insert(ModelPaintEntity modelPaintEntity) {mRepository.insert(modelPaintEntity);}
+    public void insert(ModelPaint modelPaint) {mRepository.insert(modelPaint);}
 
 }

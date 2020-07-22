@@ -14,17 +14,17 @@ public interface ModelPaintDao {
 
     // define conflict resolution strategy for insertion here
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(ModelPaintEntity modelPaintEntity);
+    void insert(ModelPaint modelPaint);
 
     @Query("DELETE FROM paint_table")
     void deleteAll();
 
     @Query("SELECT * FROM paint_table ORDER BY color ASC")
-    LiveData<List<ModelPaintEntity>> getPaintsByColor();
+    LiveData<List<ModelPaint>> getPaintsByColor();
 
     @Query("SELECT * FROM paint_table ORDER BY name ASC")
-    LiveData<List<ModelPaintEntity>> getPaintsByName();
+    LiveData<List<ModelPaint>> getPaintsByName();
 
     @Update()
-    void updateModelPaint(ModelPaintEntity modelPaintEntity);
+    void updateModelPaint(ModelPaint modelPaint);
 }

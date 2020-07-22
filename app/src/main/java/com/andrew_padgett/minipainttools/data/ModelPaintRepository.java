@@ -9,8 +9,8 @@ import java.util.List;
 public class ModelPaintRepository {
 
     private ModelPaintDao mModelPaintDao;
-    private LiveData<List<ModelPaintEntity>> mAllModelPaintsByColor;
-    private LiveData<List<ModelPaintEntity>> mAllModelPaintsByName;
+    private LiveData<List<ModelPaint>> mAllModelPaintsByColor;
+    private LiveData<List<ModelPaint>> mAllModelPaintsByName;
 
     ModelPaintRepository(Application application) {
         ModelPaintRoomDatabase db = ModelPaintRoomDatabase.getDatabase(application);
@@ -19,17 +19,17 @@ public class ModelPaintRepository {
         mAllModelPaintsByName = mModelPaintDao.getPaintsByName();
     }
 
-    LiveData<List<ModelPaintEntity>> getAllModelPaintsByColor() {
+    LiveData<List<ModelPaint>> getAllModelPaintsByColor() {
         return mAllModelPaintsByColor;
     }
 
-    LiveData<List<ModelPaintEntity>> getAllModelPaintsByName() {
+    LiveData<List<ModelPaint>> getAllModelPaintsByName() {
         return mAllModelPaintsByName;
     }
 
-    void insert(ModelPaintEntity modelPaintEntity) {
+    void insert(ModelPaint modelPaint) {
         ModelPaintRoomDatabase.databaseWriteExecutor.execute(() -> {
-            mModelPaintDao.insert(modelPaintEntity);
+            mModelPaintDao.insert(modelPaint);
         });
     }
 
